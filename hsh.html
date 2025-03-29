@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتيجة جامعة السلام - كلية الطب والجراحة</title>
+    <style>
+        body {
+            background-image: url('background.png'); /* استبدلها بالصورة التي تريدها */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            margin: auto;
+        }
+        label, select, input {
+            display: block;
+            margin: 10px auto;
+            padding: 5px;
+        }
+        button {
+            padding: 10px;
+            background: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>بسم الله الرحمن الرحيم</h1>
+        <h2>جامعة السلام - كلية الطب والجراحة</h2>
+        <h3>النتيجة</h3>
+        
+        <form onsubmit="return showResults();">
+            <label>الرقم الجامعي:</label>
+            <input type="text" id="studentId" required>
+            
+            <label>اختر دفعتك:</label>
+            <select id="batch" required>
+                <option value="الرابعة">الرابعة</option>
+                <option value="الخامسة">الخامسة</option>
+                <option value="السادسة">السادسة</option>
+                <option value="السابعة">السابعة</option>
+                <option value="الثامنة">الثامنة</option>
+            </select>
+            
+            <button type="submit">عرض النتيجة</button>
+        </form>
+        
+        <div id="result" style="display:none; margin-top: 20px;"></div>
+    </div>
+    
+    <script>
+        function showResults() {
+            var studentId = document.getElementById("studentId").value;
+            var batch = document.getElementById("batch").value;
+            var results = {
+                "11": { name: "أكرم إبراهيم رحمة الله", biology: "B", physiology: "F", biochemistry: "A", math: "B" },
+                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" }
+            };
+            
+            if (results[studentId]) {
+                var student = results[studentId];
+                document.getElementById("result").innerHTML = `
+                    <h3>بيانات الطالب الأكاديمية</h3>
+                    <p>إسم الطالب: ${student.name}</p>
+                    <p>مادة البيولوجي: ${student.biology}</p>
+                    <p>مادة الفسيولوجي: ${student.physiology}</p>
+                    <p>مادة البايوكمستري: ${student.biochemistry}</p>
+                    <p>مادة الرياضيات: ${student.math}</p>
+                `;
+                document.getElementById("result").style.display = "block";
+            } else {
+                alert("الرقم الجامعي غير موجود، حاول مرة أخرى!");
+            }
+            
+            return false;
+        }
+    </script>
+</body>
+</html>
