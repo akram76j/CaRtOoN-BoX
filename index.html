@@ -33,6 +33,11 @@
             border: none;
             cursor: pointer;
         }
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -62,15 +67,26 @@
     
     <script>
         function showResults() {
-            var studentId = document.getElementById("studentId").value;
+            var studentId = document.getElementById("studentId").value.trim();
             var batch = document.getElementById("batch").value;
+
+            if (!/^\d+$/.test(studentId)) {
+                alert("الرجاء إدخال رقم جامعي صحيح!");
+                return false;
+            }
+
             var results = {
                 "11": { name: "أكرم إبراهيم رحمة الله", biology: "B", physiology: "F", biochemistry: "A", math: "B" },
-                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" }
+                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" },
+                "90": { name: "مقداد", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
+                "80": { name: "محمد الشفيع قادم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
+                "70": { name: "محمد آدم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
+                "50": { name: "اواب عبدالله", biology: "B", physiology: "A", biochemistry: "F", math: "A" }
             };
-            
-            if (results[studentId]) {
-                var student = results[studentId];
+
+            var student = results[studentId];
+
+            if (student) {
                 document.getElementById("result").innerHTML = `
                     <h3>بيانات الطالب الأكاديمية</h3>
                     <p>إسم الطالب: ${student.name}</p>
