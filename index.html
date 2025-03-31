@@ -1,133 +1,131 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نتيجة جامعة السلام - كلية الطب والجراحة</title>
+    <title>نتيجة جامعة السلام</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
         body {
-            background-image: url('background.png');
-            background-size: cover;
-            background-position: right center;
-            background-attachment: fixed;
-            text-align: center;
-            color: white;
             font-family: 'Amiri', serif;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            margin: 0;
+            padding: 0;
         }
+
         .container {
-            background: rgba(90, 60, 30, 0.1);
+            background: rgba(139, 69, 19, 0.3); /* بني فاتح شفاف جدًا */
             padding: 20px;
             border-radius: 10px;
             width: 60%;
             margin: auto;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
         }
+
         h1, h2, h3 {
-            color: white;
+            font-weight: bold;
         }
-        label {
-            color: white;
+
+        h1 {
+            color: gold;
+        }
+
+        h2 {
+            color: lightblue;
+        }
+
+        h3 {
+            color: gold;
+        }
+
+        input, select, button {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
             font-size: 18px;
         }
-        input, select {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        select {
-            background: skyblue;
-            color: black;
-        }
+
         button {
-            padding: 10px 20px;
-            background: #4CAF50;
+            background-color: green;
             color: white;
             border: none;
-            border-radius: 8px;
             cursor: pointer;
-            font-size: 18px;
         }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        .result-container {
+            margin-top: 20px;
+        }
+
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.2);
+            margin: auto;
         }
+
         th, td {
-            border: 1px solid black;
+            border: 1px solid #000;
             padding: 10px;
             text-align: center;
-            color: black;
-            font-size: 14px;
         }
+
         th {
-            background: #8B4513;
+            background-color: darkgreen;
             color: white;
+        }
+
+        td {
+            background-color: #f0fff0;
         }
     </style>
 </head>
 <body>
+
     <div class="container">
         <h1>بسم الله الرحمن الرحيم</h1>
         <h2>جامعة السلام - كلية الطب والجراحة</h2>
         <h3>النتيجة</h3>
-        
-        <form onsubmit="return showResults();">
-            <label>الرقم الجامعي:</label>
-            <input type="text" id="studentId" required style="background: rgba(0, 0, 0, 0.1);">
-            
-            <label>اختر دفعتك:</label>
-            <select id="batch" required>
-                <option value="الرابعة">الرابعة</option>
-                <option value="الخامسة">الخامسة</option>
-                <option value="السادسة">السادسة</option>
-                <option value="السابعة">السابعة</option>
-                <option value="الثامنة">الثامنة</option>
-            </select>
-            
-            <button type="submit">عرض النتيجة</button>
-        </form>
-        
-        <div id="result" style="display:none; margin-top: 20px;"></div>
+
+        <label>الرقم الجامعي:</label>
+        <input type="text" placeholder="أدخل الرقم الجامعي">
+
+        <label>اختر دفعتك:</label>
+        <select>
+            <option>الرابعة</option>
+            <option>الخامسة</option>
+            <option>السادسة</option>
+        </select>
+
+        <button>عرض النتيجة</button>
+
+        <div class="result-container">
+            <h3>بيانات الطالب الأكاديمية</h3>
+            <table>
+                <tr>
+                    <th>اسم الطالب</th>
+                    <th>البيولوجي</th>
+                    <th>الفسيولوجي</th>
+                    <th>البايوكيميستري</th>
+                    <th>الرياضيات</th>
+                </tr>
+                <tr>
+                    <td>أحمد إبراهيم علي</td>
+                    <td>A</td>
+                    <td>-</td>
+                    <td>F</td>
+                    <td>B</td>
+                </tr>
+            </table>
+        </div>
     </div>
-    
-    <script>
-        function showResults() {
-            var studentId = document.getElementById("studentId").value;
-            var results = {
-                "11": { name: "أكرم إبراهيم رحمة الله", biology: "B", physiology: "F", biochemistry: "A", math: "B" },
-                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" },
-                "90": { name: "مقداد", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "80": { name: "محمد الشفيع قادم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "70": { name: "محمد آدم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "50": { name: "أواب عبدالله", biology: "B", physiology: "A", biochemistry: "F", math: "A" }
-            };
-            
-            if (results[studentId]) {
-                var student = results[studentId];
-                document.getElementById("result").innerHTML = `
-                    <h3>بيانات الطالب الأكاديمية</h3>
-                    <table>
-                        <tr><th>اسم الطالب</th><td>${student.name}</td></tr>
-                        <tr><th>البيولوجي</th><td>${student.biology}</td></tr>
-                        <tr><th>الفسيولوجي</th><td>${student.physiology}</td></tr>
-                        <tr><th>البايوكيميستري</th><td>${student.biochemistry}</td></tr>
-                        <tr><th>الرياضيات</th><td>${student.math}</td></tr>
-                    </table>
-                `;
-                document.getElementById("result").style.display = "block";
-            } else {
-                alert("الرقم الجامعي غير موجود، حاول مرة أخرى!");
-            }
-            
-            return false;
-        }
-    </script>
+
 </body>
 </html>
