@@ -1,132 +1,522 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتيجة جامعة السلام - كلية الطب والجراحة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+        :root {
+            --primary-color: #2c786c;
+            --secondary-color: #004445;
+            --accent-color: #f8b400;
+            --light-color: #faf5e4;
+            --dark-color: #1a1a2e;
+        }
+        
         body {
-            background-image: url('background.png');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
             background-size: cover;
-            background-position: right center;
-            background-attachment: fixed;
-            text-align: center;
-            color: white;
-            font-family: 'Amiri', serif;
-        }
-        .container {
-            background: rgba(90, 60, 30, 0.1);
+            font-family: 'Tajawal', sans-serif;
+            color: var(--light-color);
+            margin: 0;
             padding: 20px;
-            border-radius: 10px;
-            width: 60%;
-            margin: auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        h1, h2, h3 {
-            color: white;
+        
+        .container {
+            background: rgba(44, 120, 108, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--accent-color);
         }
-        label {
-            color: white;
-            font-size: 18px;
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
         }
-        input, select {
+        
+        .header h1 {
+            color: var(--accent-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header h2 {
+            color: var(--light-color);
+            font-size: 24px;
+            margin: 5px 0;
+        }
+        
+        .header h3 {
+            color: #ffffff;
+            font-size: 20px;
+            margin-top: 15px;
+        }
+        
+        .header::after {
+            content: "";
             display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 80%;
+            width: 150px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 15px auto;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--light-color);
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            border: 2px solid #ddd;
+            font-family: 'Tajawal', sans-serif;
             font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s;
         }
-        select {
-            background: skyblue;
-            color: black;
+        
+        input:focus, select:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(248, 180, 0, 0.3);
         }
+        
         button {
-            padding: 10px 20px;
-            background: #4CAF50;
-            color: white;
+            background-color: var(--accent-color);
+            color: var(--dark-color);
             border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            font-weight: 700;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 18px;
+            width: 100%;
+            margin-top: 15px;
+            transition: all 0.3s;
+            font-family: 'Tajawal', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+        
+        button:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-container {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            color: var(--dark-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .student-info {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px dashed var(--primary-color);
+        }
+        
+        .student-info h4 {
+            color: var(--secondary-color);
+            font-size: 20px;
+            margin: 5px 0;
+        }
+        
+        .student-info p {
+            margin: 5px 0;
+            color: #555;
+        }
+        
         table {
-            width: 80%;
-            margin: 20px auto;
+            width: 100%;
             border-collapse: collapse;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 10px;
+            margin-top: 20px;
+            font-size: 16px;
             text-align: center;
-            color: black;
-            font-size: 14px;
         }
+        
         th {
-            background: #8B4513;
+            background-color: var(--secondary-color);
             color: white;
+            padding: 12px;
+            font-weight: 700;
+        }
+        
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e6f7ff;
+        }
+        
+        .grade-A {
+            color: #28a745;
+            font-weight: 700;
+        }
+        
+        .grade-B {
+            color: #17a2b8;
+            font-weight: 700;
+        }
+        
+        .grade-F {
+            color: #dc3545;
+            font-weight: 700;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--light-color);
+            font-size: 14px;
+            padding: 15px;
+        }
+        
+        .university-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 15px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid var(--accent-color);
+        }
+        
+        .university-logo i {
+            font-size: 40px;
+            color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .header h2 {
+                font-size: 20px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>بسم الله الرحمن الرحيم</h1>
-        <h2>جامعة السلام - كلية الطب والجراحة</h2>
-        <h3>النتيجة</h3>
+        <div class="header">
+            <div class="university-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1>بسم الله الرحمن الرحيم</h1>
+            <h2>جامعة السلام - كلية الطب والجراحة</h2>
+            <h3>نظام عرض النتائج الأكاديمية</h3>
+        </div>
         
-        <form onsubmit="return showResults();">
-            <label>الرقم الجامعي:</label>
-            <input type="text" id="studentId" required style="background: rgba(0, 0, 0, 0.1);">
+        <form id="resultsForm" onsubmit="return showResults(event)">
+            <div class="form-group">
+                <label for="studentId"><i class="fas fa-id-card"></i> الرقم الجامعي</label>
+                <input type="text" id="studentId" required placeholder="أدخل الرقم الجامعي المكون من 8 أرقام">
+            </div>
             
-            <label>اختر دفعتك:</label>
-            <select id="batch" required>
-                <option value="الرابعة">الرابعة</option>
-                <option value="الخامسة">الخامسة</option>
-                <option value="السادسة">السادسة</option>
-                <option value="السابعة">السابعة</option>
-                <option value="الثامنة">الثامنة</option>
-            </select>
+            <div class="form-group">
+                <label for="batch"><i class="fas fa-users"></i> اختر الدفعة</label>
+                <select id="batch" required>
+                    <option value="" disabled selected>اختر دفعتك</option>
+                    <option value="الرابعة">الدفعة الرابعة</option>
+                    <option value="الخامسة">الدفعة الخامسة</option>
+                    <option value="السادسة">الدفعة السادسة</option>
+                    <option value="السابعة">الدفعة السابعة</option>
+                    <option value="الثامنة">الدفعة الثامنة</option>
+                </select>
+            </div>
             
-            <button type="submit">عرض النتيجة</button>
+            <button type="submit">
+                <i class="fas fa-search"></i> عرض النتيجة
+            </button>
         </form>
         
-        <div id="result" style="display:none; margin-top: 20px;"></div>
+        <div id="result" class="result-container">
+            <!-- سيتم ملؤها بواسطة الجافاسكريبت -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>جميع الحقوق محفوظة &copy; 2023 جامعة السلام - كلية الطب والجراحة</p>
+        <p>هاتف: 123456789 | البريد الإلكتروني: medicine@alsalam.edu</p>
     </div>
     
     <script>
-        function showResults() {
-            var studentId = document.getElementById("studentId").value;
-            var results = {
-                "11": { name: "أكرم إبراهيم رحمة الله", biology: "B", physiology: "F", biochemistry: "A", math: "B" },
-                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" },
-                "90": { name: "مقداد", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "80": { name: "محمد الشفيع قادم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "70": { name: "محمد آدم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "50": { name: "أواب عبدالله", biology: "B", physiology: "A", biochemistry: "F", math: "A" }
-            };
+        // قاعدة بيانات الطلاب المحدثة
+        const students = {
+            "12345678": {
+                name: "أكرم إبراهيم رحمة",
+                batch: "الرابعة",
+                id: "12345678",
+                courses: {
+                    biology: { grade: "A", credit: 3 },
+                    physiology: { grade: "B", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "B", credit: 2 },
+                    anatomy: { grade: "A", credit: 3 }
+                }
+            },
+            "11112222": {
+                name: "محمد الشفيع",
+                batch: "الرابعة",
+                id: "11112222",
+                courses: {
+                    biology: { grade: "B", credit: 3 },
+                    physiology: { grade: "A", credit: 4 },
+                    biochemistry: { grade: "B", credit: 3 },
+                    math: { grade: "A", credit: 2 },
+                    anatomy: { grade: "B", credit: 3 }
+                }
+            },
+            "22223333": {
+                name: "محمد آدم",
+                batch: "الخامسة",
+                id: "22223333",
+                courses: {
+                    biology: { grade: "A", credit: 3 },
+                    physiology: { grade: "A", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "B", credit: 2 },
+                    anatomy: { grade: "A", credit: 3 }
+                }
+            },
+            "33334444": {
+                name: "حامد آدم",
+                batch: "الخامسة",
+                id: "33334444",
+                courses: {
+                    biology: { grade: "B", credit: 3 },
+                    physiology: { grade: "B", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "A", credit: 2 },
+                    anatomy: { grade: "B", credit: 3 }
+                }
+            },
+            "44445555": {
+                name: "المقداد محمد",
+                batch: "السادسة",
+                id: "44445555",
+                courses: {
+                    biology: { grade: "A", credit: 3 },
+                    physiology: { grade: "A", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "A", credit: 2 },
+                    anatomy: { grade: "A", credit: 3 }
+                }
+            },
+            "55556666": {
+                name: "الفاتح محمد موسى",
+                batch: "السادسة",
+                id: "55556666",
+                courses: {
+                    biology: { grade: "B", credit: 3 },
+                    physiology: { grade: "F", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "B", credit: 2 },
+                    anatomy: { grade: "A", credit: 3 }
+                }
+            },
+            "66667777": {
+                name: "محمد علي الناظر",
+                batch: "السابعة",
+                id: "66667777",
+                courses: {
+                    biology: { grade: "A", credit: 3 },
+                    physiology: { grade: "A", credit: 4 },
+                    biochemistry: { grade: "B", credit: 3 },
+                    math: { grade: "A", credit: 2 },
+                    anatomy: { grade: "A", credit: 3 }
+                }
+            },
+            "77778888": {
+                name: "حامد سعيد",
+                batch: "الثامنة",
+                id: "77778888",
+                courses: {
+                    biology: { grade: "A", credit: 3 },
+                    physiology: { grade: "B", credit: 4 },
+                    biochemistry: { grade: "A", credit: 3 },
+                    math: { grade: "A", credit: 2 },
+                    anatomy: { grade: "B", credit: 3 }
+                }
+            }
+        };
+        
+        function showResults(event) {
+            event.preventDefault();
             
-            if (results[studentId]) {
-                var student = results[studentId];
-                document.getElementById("result").innerHTML = `
-                    <h3>بيانات الطالب الأكاديمية</h3>
+            const studentId = document.getElementById("studentId").value;
+            const batch = document.getElementById("batch").value;
+            const resultContainer = document.getElementById("result");
+            
+            // التحقق من وجود الطالب
+            if (students[studentId]) {
+                const student = students[studentId];
+                
+                // التحقق من أن الدفعة مطابقة
+                if (student.batch !== batch) {
+                    alert("الرقم الجامعي لا ينتمي إلى هذه الدفعة!");
+                    return false;
+                }
+                
+                // حساب المعدل التراكمي
+                let totalPoints = 0;
+                let totalCredits = 0;
+                
+                Object.values(student.courses).forEach(course => {
+                    const gradeValue = getGradeValue(course.grade);
+                    totalPoints += gradeValue * course.credit;
+                    totalCredits += course.credit;
+                });
+                
+                const gpa = (totalPoints / totalCredits).toFixed(2);
+                
+                // عرض النتيجة
+                resultContainer.innerHTML = `
+                    <div class="student-info">
+                        <h4>البيانات الأكاديمية للطالب</h4>
+                        <p><strong>اسم الطالب:</strong> ${student.name}</p>
+                        <p><strong>الرقم الجامعي:</strong> ${student.id}</p>
+                        <p><strong>الدفعة:</strong> ${student.batch}</p>
+                        <p><strong>المعدل التراكمي:</strong> <span class="grade-A">${gpa}</span></p>
+                    </div>
+                    
                     <table>
-                        <tr><th>اسم الطالب</th><td>${student.name}</td></tr>
-                        <tr><th>البيولوجي</th><td>${student.biology}</td></tr>
-                        <tr><th>الفسيولوجي</th><td>${student.physiology}</td></tr>
-                        <tr><th>البايوكيميستري</th><td>${student.biochemistry}</td></tr>
-                        <tr><th>الرياضيات</th><td>${student.math}</td></tr>
+                        <thead>
+                            <tr>
+                                <th>المادة</th>
+                                <th>الدرجة</th>
+                                <th>الساعات المعتمدة</th>
+                                <th>التقدير</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${generateCourseRows(student.courses)}
+                        </tbody>
                     </table>
+                    
+                    <div style="margin-top: 20px; text-align: left;">
+                        <p><strong>ملاحظات:</strong></p>
+                        <ul style="padding-right: 20px;">
+                            <li>الدرجة A: ممتاز (90-100)</li>
+                            <li>الدرجة B: جيد جداً (80-89)</li>
+                            <li>الدرجة F: راسب (أقل من 60)</li>
+                        </ul>
+                    </div>
                 `;
-                document.getElementById("result").style.display = "block";
+                
+                resultContainer.style.display = "block";
+                
+                // التمرير إلى النتيجة
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
             } else {
-                alert("الرقم الجامعي غير موجود، حاول مرة أخرى!");
+                alert("الرقم الجامعي غير مسجل في النظام، يرجى التأكد وإعادة المحاولة");
             }
             
             return false;
+        }
+        
+        function generateCourseRows(courses) {
+            let rows = '';
+            
+            for (const [courseName, details] of Object.entries(courses)) {
+                const arabicCourseName = getArabicCourseName(courseName);
+                const gradeClass = `grade-${details.grade}`;
+                const evaluation = getEvaluation(details.grade);
+                
+                rows += `
+                    <tr>
+                        <td>${arabicCourseName}</td>
+                        <td class="${gradeClass}">${details.grade}</td>
+                        <td>${details.credit}</td>
+                        <td>${evaluation}</td>
+                    </tr>
+                `;
+            }
+            
+            return rows;
+        }
+        
+        function getArabicCourseName(englishName) {
+            const courses = {
+                biology: "علم الأحياء (البيولوجي)",
+                physiology: "علم وظائف الأعضاء (الفسيولوجي)",
+                biochemistry: "الكيمياء الحيوية (البايوكيميستري)",
+                math: "الرياضيات الطبية",
+                anatomy: "التشريح (الأناتومي)"
+            };
+            
+            return courses[englishName] || englishName;
+        }
+        
+        function getGradeValue(grade) {
+            const gradeValues = {
+                'A': 4.0,
+                'B': 3.0,
+                'F': 0.0
+            };
+            
+            return gradeValues[grade] || 0;
+        }
+        
+        function getEvaluation(grade) {
+            const evaluations = {
+                'A': 'ممتاز',
+                'B': 'جيد جداً',
+                'F': 'راسب'
+            };
+            
+            return evaluations[grade] || '--';
         }
     </script>
 </body>
