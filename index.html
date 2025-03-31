@@ -4,39 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نتيجة جامعة السلام - كلية الطب والجراحة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-image: url('background.png'); /* استبدلها بالصورة التي تريدها */
+            background: url('kreef.jpg') no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
             text-align: center;
-            color: white;
-            font-family: Arial, sans-serif;
+            font-family: 'Amiri', serif; /* الخط الكوفي */
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
         }
         .container {
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            width: 50%;
+            width: 60%;
             margin: auto;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+        }
+        h1 {
+            color: gold;
+            font-size: 26px;
+        }
+        h2 {
+            color: lightblue;
+            font-size: 22px;
+        }
+        h3 {
+            color: #ffcc00;
+            font-size: 20px;
         }
         label, select, input {
             display: block;
             margin: 10px auto;
-            padding: 5px;
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-family: 'Amiri', serif;
         }
         button {
             padding: 10px;
-            background: green;
+            background: #008000;
             color: white;
             border: none;
             cursor: pointer;
+            width: 50%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: 'Amiri', serif;
         }
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
+        button:hover {
+            background: #006400;
+        }
+        .result-container {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 14px; /* تصغير الخط */
+        }
+        table {
+            width: 95%;  /* جعل الجدول أضيق ليكون في المنتصف */
+            border-collapse: collapse;
+            margin: auto; /* توسيطه بالكامل */
+            background: white;
+            color: black;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            font-size: 14px; /* تصغير الخط داخل الجدول */
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px; /* تقليل المساحة الداخلية */
+            text-align: center;
+        }
+        th {
+            background: #004d00;
+            color: white;
+        }
+        td {
+            background: #e6ffe6;
         }
     </style>
 </head>
@@ -62,38 +118,37 @@
             <button type="submit">عرض النتيجة</button>
         </form>
         
-        <div id="result" style="display:none; margin-top: 20px;"></div>
+        <div id="result" class="result-container" style="display:none;"></div>
     </div>
     
     <script>
         function showResults() {
-            var studentId = document.getElementById("studentId").value.trim();
-            var batch = document.getElementById("batch").value;
-
-            if (!/^\d+$/.test(studentId)) {
-                alert("الرجاء إدخال رقم جامعي صحيح!");
-                return false;
-            }
-
+            var studentId = document.getElementById("studentId").value;
             var results = {
                 "11": { name: "أكرم إبراهيم رحمة الله", biology: "B", physiology: "F", biochemistry: "A", math: "B" },
-                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" },
-                "90": { name: "مقداد", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "80": { name: "محمد الشفيع قادم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "70": { name: "محمد آدم", biology: "B", physiology: "A", biochemistry: "F", math: "A" },
-                "50": { name: "اواب عبدالله", biology: "B", physiology: "A", biochemistry: "F", math: "A" }
+                "22": { name: "أحمد إبراهيم علي", biology: "A", physiology: "-", biochemistry: "F", math: "B" }
             };
-
-            var student = results[studentId];
-
-            if (student) {
+            
+            if (results[studentId]) {
+                var student = results[studentId];
                 document.getElementById("result").innerHTML = `
                     <h3>بيانات الطالب الأكاديمية</h3>
-                    <p>إسم الطالب: ${student.name}</p>
-                    <p>مادة البيولوجي: ${student.biology}</p>
-                    <p>مادة الفسيولوجي: ${student.physiology}</p>
-                    <p>مادة البايوكمستري: ${student.biochemistry}</p>
-                    <p>مادة الرياضيات: ${student.math}</p>
+                    <table>
+                        <tr>
+                            <th>إسم الطالب</th>
+                            <th>البيولوجي</th>
+                            <th>الفسيولوجي</th>
+                            <th>البايوكيميستري</th>
+                            <th>الرياضيات</th>
+                        </tr>
+                        <tr>
+                            <td>${student.name}</td>
+                            <td>${student.biology}</td>
+                            <td>${student.physiology}</td>
+                            <td>${student.biochemistry}</td>
+                            <td>${student.math}</td>
+                        </tr>
+                    </table>
                 `;
                 document.getElementById("result").style.display = "block";
             } else {
